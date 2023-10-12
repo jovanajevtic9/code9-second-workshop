@@ -6,7 +6,7 @@ cd ..
 cd gateway
 npm i
 
-#start redis from terminal
+start redis:
 redis-server
 
 If you need to change redis port:
