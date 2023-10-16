@@ -10,4 +10,24 @@ export class ProductController {
   getProducts() {
     return this.productService.getProducts();
   }
+
+  @MessagePattern('create_product')
+  createProduct(body: any) {
+    return this.productService.createProduct(body);
+  }
+
+  @MessagePattern('product')
+  getProduct(id: string) {
+    return this.productService.find(parseInt(id))
+  }
+
+  @MessagePattern('delete_product')
+  deleteProduct(id: string) {
+      return this.productService.delete(parseInt(id));
+  }
+
+  @MessagePattern('update_product')
+  updateProduct(data: any) {
+      return this.productService.update(parseInt(data.id), data.body);
+  }
 }

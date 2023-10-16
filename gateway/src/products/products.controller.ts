@@ -8,7 +8,6 @@ export class ProductsController {
   @Get('/')
   getProducts() {
     return this.productService.getProducts();
-    // return this.client.send('products_all', {});
   }
 
   @Get('/:id')
@@ -31,8 +30,6 @@ export class ProductsController {
 
   @Put('/:id')
   updateProduct(@Param('id') id: string, @Body() body: any) {
-    // return 'str';
     return this.productService.updateProduct(id, body);
-    // return this.client.send('product_update', { id, body });
   }
 }

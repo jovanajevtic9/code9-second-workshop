@@ -11,22 +11,21 @@ export class ProductsService {
 
   getProducts() {
     return this.client.send('show_products', {});
-    // return ['Product 3', 'Product 4'];
   }
 
   getProduct(id: string) {
-    return `Returning product with id = ${id}`;
+    return this.client.send('product', id)
   }
 
   createProduct(body: any) {
-    return body;
+    return this.client.send('create_product', body)
   }
 
   deleteProduct(id: string) {
-    return `Deleting product with id = ${id}`;
+    return this.client.send('delete_product', id);
   }
 
   updateProduct(id: string, body: any) {
-    return `Updating product with id = ${id} with body = ${body.name}`;
+    return this.client.send('update_product', {id, body});
   }
 }
