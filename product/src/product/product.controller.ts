@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import {EventPattern, MessagePattern} from '@nestjs/microservices';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -29,5 +29,10 @@ export class ProductController {
   @MessagePattern('update_product')
   updateProduct(data: any) {
       return this.productService.update(parseInt(data.id), data.body);
+  }
+
+  @EventPattern('order-created-success')
+  orderCreatedHandler(data: any) {
+    return this.productService.orderCreatedHandler(data.orderedProducts);
   }
 }

@@ -14,7 +14,10 @@ export class CartService {
     }
 
     getAllProducts() {
-        console.log('gateway...')
         return this.client.send('all_products_cart', {})
+    }
+
+    removeProductFromCart(id) {
+        return this.client.send('remove_product_from_cart', {id})
     }
 }

@@ -39,4 +39,10 @@ export class ProductService {
     product.quantity = product.quantity -  body.quantity;
     return this.repo.update(product.id, product);
   }
+
+  async orderCreatedHandler(orderedProducts: any) {
+    orderedProducts.forEach(product => {
+      this.update(product.productId, product);
+    })
+  }
 }

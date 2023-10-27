@@ -14,7 +14,11 @@ export class CartController {
 
     @MessagePattern('all_products_cart')
     getCart() {
-        console.log('all_products_cart')
         return this.cartService.getCart()
+    }
+
+    @MessagePattern('remove_product_from_cart')
+    removeProduct(data: any) {
+        return this.cartService.removeProductFromCart(parseInt(data.id))
     }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Client, ClientProxy, Transport } from '@nestjs/microservices';
+import {CreateProductDto} from "../dtos/create-product.dto";
 
 @Injectable()
 export class ProductsService {
@@ -17,7 +18,7 @@ export class ProductsService {
     return this.client.send('product', id)
   }
 
-  createProduct(body: any) {
+  createProduct(body: CreateProductDto) {
     return this.client.send('create_product', body)
   }
 
