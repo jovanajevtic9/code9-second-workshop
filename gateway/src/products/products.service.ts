@@ -1,32 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { Client, ClientProxy, Transport } from '@nestjs/microservices';
-import {CreateProductDto} from "../dtos/create-product.dto";
+import {Client, ClientProxy, Transport} from "@nestjs/microservices";
 
 @Injectable()
-export class ProductsService {
-  @Client({
-    transport: Transport.REDIS,
-  })
-  private client: ClientProxy;
-  constructor() {}
+export class ProductService {
+    @Client({
+        transport: Transport.REDIS
+    })
+    private client: ClientProxy;
 
-  getProducts() {
-    return this.client.send('show_products', {});
-  }
+    findAll() {
+        return this.client.send('products_all', {});
+    }
 
-  getProduct(id: string) {
-    return this.client.send('product', id)
-  }
+    findOne(id) {
+        return this.client.send('product', id);
+    }
 
-  createProduct(body: CreateProductDto) {
-    return this.client.send('create_product', body)
-  }
+    create(body) {
+        return this.client.send('product_create', body);
+    }
 
-  deleteProduct(id: string) {
-    return this.client.send('delete_product', id);
-  }
+    delete(id) {
+        return this.client.send('product_delete', id);
+    }
 
-  updateProduct(id: string, body: any) {
-    return this.client.send('update_product', {id, body});
-  }
 }

@@ -1,20 +1,33 @@
-import { Body, Controller, Param } from '@nestjs/common';
-import { OrderService } from './order.service';
-import {Post, Get } from '@nestjs/common';
-import {CreateOrderDto} from "../dtos/create-order.dto";
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Client, ClientProxy, Transport } from '@nestjs/microservices';
+import { CreateOrderDto } from '../dtos/create-order.dto';
+import {OrderService} from "./order.service";
 
 @Controller('order')
 export class OrderController {
+  @Client({
+    transport: Transport.REDIS
+  })
+  private client: ClientProxy;
+  constructor(private orderService: OrderService) {}
 
-    constructor(private readonly orderService: OrderService){}
+  @Post('/')
+  createOrder(@Body() body: CreateOrderDto) {
+    return this.orderService.create(body);
+  }
 
-    @Post('/')
-    createOrder(@Body() body: CreateOrderDto) {
-        return this.orderService.createOrder(body);
-    }
+  @Get('/')
+  getOrder() {
+    return this.orderService.find();
+  }
 
-    @Get('/')
-    getOrder() {
-        return this.orderService.getOrder();
-    }
+  @Delete('/:id')
+  removeOrder(@Param('id') id: string) {
+    return this.orderService.remove(id);
+  }
+
+  @Delete()
+  removeOrders() {
+    return this.orderService.removeAll();
+  }
 }

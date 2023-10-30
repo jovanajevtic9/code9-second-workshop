@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Client, ClientProxy, Transport } from '@nestjs/microservices';
+import {CreateOrderDto} from "../dtos/create-order.dto";
+import {Client, ClientProxy, Transport} from "@nestjs/microservices";
 
 @Injectable()
 export class OrderService {
@@ -8,12 +9,19 @@ export class OrderService {
     })
     private client: ClientProxy;
 
-    createOrder(body) {
-        return this.client.send('create_order', body)
+    create(body) {
+        return this.client.send('order_create', body);
     }
 
-    getOrder() {
+    find(){
         return this.client.send('order_all', {});
     }
 
+    remove(id) {
+        return this.client.send('order_delete', id);
+    }
+
+    removeAll() {
+        return this.client.send('order_delete_all', {});
+    }
 }

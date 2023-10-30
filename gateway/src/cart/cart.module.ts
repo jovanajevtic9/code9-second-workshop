@@ -3,7 +3,8 @@ import { CartController } from './cart.controller';
 import { CartService } from './cart.service';
 
 @Module({
-  controllers: [CartController],
-  providers: [CartService]
+  providers: [CartService],
+  imports: [],
+  controllers: [CartController]
 })
 export class CartModule {}

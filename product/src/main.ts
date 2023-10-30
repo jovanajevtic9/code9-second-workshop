@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
+import { ProductModule } from './product.module';
 import { Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.REDIS,
+  const app = await NestFactory.createMicroservice(ProductModule, {
+    transport: Transport.REDIS
   });
   await app.listen();
 }

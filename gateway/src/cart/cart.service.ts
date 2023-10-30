@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Client, ClientProxy, Transport } from '@nestjs/microservices';
+import {Client, ClientProxy, Transport} from "@nestjs/microservices";
 
 @Injectable()
 export class CartService {
@@ -8,16 +8,20 @@ export class CartService {
     })
     private client: ClientProxy;
 
- 
+    findAll() {
+        return this.client.send('cart_all', {});
+    }
+
     addProductToCart(id, body) {
-        return this.client.send('add_product_to_cart', {id, body})
+        return this.client.send('cart_add_product', {id, body});
     }
 
-    getAllProducts() {
-        return this.client.send('all_products_cart', {})
+    removeCart(id) {
+        return this.client.send('cart_delete', id);
     }
 
-    removeProductFromCart(id) {
-        return this.client.send('remove_product_from_cart', {id})
+    removeProduct(id) {
+        return this.client.send('cart_delete_product', id);
     }
+
 }

@@ -1,13 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class CartItem {
-    @PrimaryGeneratedColumn()
-    id: number;
+export class Cart {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    productId: number;
+  @Column()
+  productId: number;
 
-    @Column()
-    quantity: number;
+  @Column()
+  quantity: number;
 }
